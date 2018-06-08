@@ -20,22 +20,24 @@ public class ArrayStorage {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid == uuid)
                 return storage[i];
-            /* Сравнивая запрашиваемое с тем что имеем в массиве и выводим его*/
+
         }
-        return null; /* Если нет, то выводить null */
+        return null;
     }
 
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid == uuid)
+            if (storage[i].uuid.equals(uuid)) {
                 storage[i] = storage[size - 1];
+                storage[size - 1] = null;
+                size--;
+                return;
+            }
         }
-        size--;
 
     }
 
     Resume[] getAll() {
-        Resume[] storage = new Resume[size];
         return Arrays.copyOf(storage, size);
     }
 
