@@ -9,14 +9,13 @@ public class ArrayStorage {
         size = 0;
     }
 
-    void save(Resume r) {
-        int i = getIndex(r.getUuid());
-        if (i == -1) {
-            System.out.println("Такого резюме не существует.");
+    void save(Resume resume) {
+        if (getIndex(resume.getUuid()) != -1) {
+            System.out.println("Такое резюме уже хранится в базе");
         } else if (size == storage.length) {
             System.out.println("Все места заняты");
         } else if (size < storage.length) {
-            storage[size] = r;
+            storage[size] = resume;
             size++;
         }
     }
