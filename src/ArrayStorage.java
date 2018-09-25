@@ -10,20 +10,24 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
-        if (size == storage.length) {
+        int i = getIndex(r.getUuid());
+        if (i == -1) {
+            System.out.println("Такого резюме не существует.");
+        } else if (size == storage.length) {
             System.out.println("Все места заняты");
-        } else
+        } else if (size < storage.length) {
             storage[size] = r;
-        size++;
+            size++;
+        }
     }
 
     
-    void update(Resume resume) {
-        int i = getIndex(resume.getUuid());
+    void update(Resume r) {
+        int i = getIndex(r.getUuid());
         if (i == -1) {
-            System.out.println("Резюме " + resume.getUuid() + " не существует");
+            System.out.println("Такого резюме не существует.");
         } else {
-            storage[i] = resume;
+            storage[i] = r;
         }
     }
 
