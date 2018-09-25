@@ -12,29 +12,52 @@ public class ArrayStorage {
     void save(Resume r) {
         if (size == storage.length) {
             System.out.println("Все места заняты");
-        }   else
+        } else
             storage[size] = r;
-            size++;
+        size++;
+    }
+
+    
+    void update(Resume resume) {
+        int i = getIndex(resume.getUuid());
+        if (i == -1) {
+            System.out.println("Резюме " + resume.getUuid() + " не существует");
+        } else {
+            storage[i] = resume;
         }
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid == uuid)
-                return storage[i];
+        int i = getIndex(uuid);
+        if (i == -1) {
+            System.out.println("Такого резюме не существует.");
+            return null;
+        } else {
+            return storage[i];
         }
-        return null;
-    }
+}
 
-    void delete(String uuid) {
+    private int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                storage[i] = storage[size - 1];
-                storage[size - 1] = null;
-                size--;
-                return;
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
             }
         }
+        return -1;
+    }
+
+
+
+    void delete(String uuid) {
+        int i = getIndex(uuid);
+        if (i == -1) {
+            System.out.println("Такого резюме не существует.");
+        } else {
+            storage[i] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
+        }
+
     }
 
 
