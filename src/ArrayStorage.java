@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    Resume[] storage = new Resume[10_000];
     int size = 0;
 
     void clear() {
@@ -14,13 +14,12 @@ public class ArrayStorage {
             System.out.println("Такое резюме уже хранится в базе");
         } else if (size == storage.length) {
             System.out.println("Все места заняты");
-        } else if (size < storage.length) {
+        } else {
             storage[size] = resume;
             size++;
         }
     }
 
-    
     void update(Resume r) {
         int i = getIndex(r.getUuid());
         if (i == -1) {
@@ -38,18 +37,7 @@ public class ArrayStorage {
         } else {
             return storage[i];
         }
-}
-
-    private int getIndex(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                return i;
-            }
-        }
-        return -1;
     }
-
-
 
     void delete(String uuid) {
         int i = getIndex(uuid);
@@ -63,13 +51,20 @@ public class ArrayStorage {
 
     }
 
-
-
     Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
 
     int size() {
-        return 0;
+        return size;
+    }
+
+    private int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
